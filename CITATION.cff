@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "KADEM: Kinematic-Kinetic Automated Data Extraction in Motion"
+abstract: >-
+  Desktop program that extracts event-based gait variables (kinematics, kinetics, ground reaction force,
+  spatiotemporal parameters and EMG) from C3D files processed with Plug-in Gait and writes them to an
+  Excel workbook for statistical analysis.
+authors:
+  - family-names: Hekim
+    given-names: "Ömer"
+    orcid: "https://orcid.org/0000-0002-7977-6797"
+    affiliation: "Motion Analysis Laboratory, Department of Orthopedics and Traumatology, Kartal Dr. Lütfi Kırdar City Hospital, Istanbul, Türkiye"
+version: 0.3.0
+date-released: 2026-11-13
+keywords:
+  - gait analysis
+  - C3D
+  - Plug-in Gait
+  - biomechanics
+  - electromyography
+license: MIT
