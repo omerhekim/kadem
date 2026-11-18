@@ -99,10 +99,11 @@ def main(argv=None):
         while not s.kapanis.is_set():
             time.sleep(1.0)
             if tarayici_sureci is not None:
-                if tarayici_sureci.poll() is not None:
-                    # pencere kapandı; kısa bir süre yeni istek gelmezse kapat
-                    if time.time() - s.son_istek > 3:
-                        break
+                # Edge bazen kendini yeniden başlatır ya da pencereyi başka bir işleme devreder; başlattığımız işlem
+                # bitse de pencere açık kalabilir. Bu yüzden kapanma kararı pencereden gelen sinyale göre verilir:
+                # pencere 10 sn'de bir sinyal gönderir (arka plandaki pencerede tarayıcı bunu dakikada bire indirebilir).
+                if tarayici_sureci.poll() is not None and time.time() - s.son_istek > 150:
+                    break
             elif not a.pencere_yok and time.time() - max(s.son_istek, s.oturum.son_ping) > 15 * 60:
                 break   # tarayıcı modunda 15 dk hiç istek yoksa kapan
     except KeyboardInterrupt:

@@ -155,6 +155,7 @@ def _istatistik(q, ist, d) -> str:
                  f'(threshold: Methods sheet, "Lobe statistics"; lobe duration is measured between zero crossings by '
                  f'linear interpolation). If there is no such lobe in the window the value is empty. If the lobe touches '
                  f'the first or last sample of the window, a note is written to the Warnings sheet.')
+    vadi_varsayilan = 'tepe genliğinin %3\'ü'   # f-string içinde ters bölü Python < 3.12'de geçersiz
     t = {
         'deger': M('Seçilen andaki değer (an iki kare arasındaysa komşu karelerden doğrusal interpolasyon).',
                    'Value at the selected instant (linear interpolation between neighbouring frames).'),
@@ -206,7 +207,7 @@ def _istatistik(q, ist, d) -> str:
         'tepe2': M(f'Aralık ikiye bölünür; ilk yarının en büyüğü 1. tepe, ikinci yarının en büyüğü (son %'
                    f'{100 * float((q.par or {}).get("son_atla", 0.05)):g} hariç) 2. tepedir. 2. tepe ±3 örnekte yerel '
                    f'maksimum değilse ya da iki tepe arasındaki vadi her iki tepeden en az '
-                   f'{(q.par or {}).get("vadi_esik", "tepe genliğinin %3\'ü")} daha düşük değilse değer boş kalır.',
+                   f'{(q.par or {}).get("vadi_esik", vadi_varsayilan)} daha düşük değilse değer boş kalır.',
                    f'The window is split in half; the maximum of the first half is peak 1, the maximum of the second half '
                    f'(excluding the last {100 * float((q.par or {}).get("son_atla", 0.05)):g}%) is peak 2. If peak 2 is not '
                    f'a local maximum within ±3 samples, or the valley between the peaks is not at least '

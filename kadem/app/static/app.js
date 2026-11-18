@@ -140,7 +140,7 @@ function cevirMetin(n) {
   if (c !== v) n.nodeValue = c;
 }
 function cevirOzn(el) {
-  for (const a of ['title', 'placeholder']) {
+  for (const a of ['title', 'placeholder', 'label', 'aria-label']) {
     const v = el.getAttribute && el.getAttribute(a);
     if (v) { const c = cevir(v); if (c !== v) el.setAttribute(a, c); }
   }
@@ -151,7 +151,7 @@ function cevirDugum(kok) {
   const tw = document.createTreeWalker(kok, NodeFilter.SHOW_TEXT);
   let n; while ((n = tw.nextNode())) cevirMetin(n);
   cevirOzn(kok);
-  kok.querySelectorAll('[title],[placeholder]').forEach(cevirOzn);
+  kok.querySelectorAll('[title],[placeholder],[label],[aria-label]').forEach(cevirOzn);
 }
 async function dilHazirla() {
   if (S?.dil !== 'en') return;
@@ -172,7 +172,7 @@ async function dilHazirla() {
     }
   });
   CEV.gozlemci.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true,
-    attributeFilter: ['title', 'placeholder'] });
+    attributeFilter: ['title', 'placeholder', 'label', 'aria-label'] });
 }
 async function dilDegistir(d) {
   if (d === S.dil) return;
@@ -224,7 +224,8 @@ async function yokla() {
     render();
   } finally { UI.yoklaniyor = false; }
 }
-setInterval(() => { if (!UI.yoklaniyor) api('ping').catch(() => {}); }, 30000);
+// Pencere açık olduğu sürece sunucuya düzenli sinyal: program, sinyal kesilince pencerenin kapandığını anlar
+setInterval(() => { if (!UI.yoklaniyor) api('ping').catch(() => {}); }, 10000);
 
 /* ------------------------------------------------------------------ modal */
 function modal({ baslik, govde, butonlar = [], genis = false, kapaninca }) {

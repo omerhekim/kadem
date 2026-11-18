@@ -16,6 +16,15 @@ a = Analysis(
     excludes=['matplotlib', 'IPython', 'PyQt5', 'PyQt6', 'PySide2', 'PySide6', 'pytest', 'notebook', 'sphinx'],
     noarchive=False,
 )
+# Güvenlik: kadem paketindeki her modül exe'ye girmiş olmalı. Derleme aracı okuyamadığı bir dosyayı sessizce
+# dışarıda bırakır (ör. kullanılan Python sürümünde geçersiz bir yazım); o zaman derleme burada durur.
+import glob as _glob, os as _os
+_beklenen = {'kadem.' + _os.path.relpath(p, 'kadem')[:-3].replace(_os.sep, '.') for p in _glob.glob('kadem/**/*.py', recursive=True)}
+_beklenen = {m[:-len('.__init__')] if m.endswith('.__init__') else m for m in _beklenen}
+_eksik = sorted(_beklenen - {ad for ad, _, _ in a.pure})
+if _eksik:
+    raise SystemExit('Exe\'ye girmeyen modüller: ' + ', '.join(_eksik))
+
 pyz = PYZ(a.pure)
 exe = EXE(
     pyz,

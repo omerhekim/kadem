@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.1
+
+- Fixed: writing the Excel file failed with "No module named 'kadem.algoritma'" in the Windows program and on
+  Python 3.10–3.11 (a line used syntax that is only valid from Python 3.12).
+- Fixed: the program could close itself while its window was still open ("Program cannot be reached"), when Edge
+  restarted itself or handed the window over to another Edge process. The program now closes when the window has
+  stopped sending its regular signal.
+- English interface: drop-down group headings (e.g. "Windows", "Instants") were still in Turkish.
+- Windows build: the build now stops if any module is missing from the program, and the source is checked on
+  Python 3.10–3.13.
+
 ## 0.3.0
 
 - The program is now called KADEM (Kinematic–Kinetic Automated Data Extraction in Motion). Projects and templates from
