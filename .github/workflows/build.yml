@@ -1,0 +1,52 @@
+# KADEM.exe'yi GitHub'ın Windows makinesinde derler ve indirilebilir zip olarak koyar.
+# Çalıştırma: depo sayfası → Actions → "Windows exe" → Run workflow
+# (main dalına her yüklemede ve v* etiketlerinde kendiliğinden de çalışır).
+name: Windows exe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Paketleri kur
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pyinstaller
+
+      - name: KADEM.exe derle
+        run: python -m PyInstaller --noconfirm --clean KADEM.spec
+
+      - name: Exe açılıyor mu (duman testi)
+        shell: pwsh
+        run: |
+          $p = Start-Process -FilePath "dist\KADEM\KADEM.exe" -ArgumentList "--port","8765","--pencere-yok","--token","ci" -PassThru
+          $ok = $false
+          for ($i = 0; $i -lt 30; $i++) {
+            Start-Sleep -Seconds 2
+            try {
+              $r = Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8765/api/ping" -Headers @{ "X-Token" = "ci" } -Body "{}" -ContentType "application/json"
+              Write-Host "Sunucu yanıt verdi: $($r | ConvertTo-Json -Compress -Depth 3)"
+              $ok = $true
+              break
+            } catch { }
+          }
+          Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
+          if (-not $ok) { throw "KADEM.exe başladı ama 60 saniye içinde yanıt vermedi." }
+
+      - name: Zip olarak koy
+        uses: actions/upload-artifact@v4
+        with:
+          name: KADEM_Windows
+          path: dist/KADEM/
+          retention-days: 90
