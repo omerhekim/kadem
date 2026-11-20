@@ -1,5 +1,7 @@
 # KADEM
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24401203.svg)](https://doi.org/10.5281/zenodo.24401203)
+
 **Kinematic–Kinetic Automated Data Extraction in Motion** (Türkçe: [BENIOKU.md](BENIOKU.md))
 
 KADEM is a desktop program that extracts event-based gait variables from C3D files processed with Plug-in Gait and writes
@@ -110,7 +112,13 @@ data.
 
 ## Citing
 
-If you use KADEM in a publication, please cite the version you used. See [CITATION.cff](CITATION.cff).
+KADEM is archived on Zenodo. If you use it in a publication, please cite the version you used:
+
+> Hekim Ö. *KADEM: Kinematic–Kinetic Automated Data Extraction in Motion* (Version 0.3.1) [Computer software].
+> Zenodo; 2026. https://doi.org/10.5281/zenodo.24401204
+
+The DOI [10.5281/zenodo.24401203](https://doi.org/10.5281/zenodo.24401203) refers to all versions and always resolves to the latest one; the DOI of each
+version is listed on that Zenodo page. Citation metadata: [CITATION.cff](CITATION.cff).
 
 ## Use of AI in development
 

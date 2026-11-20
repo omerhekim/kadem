@@ -1,5 +1,7 @@
 # KADEM
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24401203.svg)](https://doi.org/10.5281/zenodo.24401203)
+
 **Kinematic–Kinetic Automated Data Extraction in Motion** (English: [README.md](README.md))
 
 Plug-in Gait ile işlenmiş C3D dosyalarından yürüme analizi değişkenlerini çeken masaüstü programı.
@@ -133,6 +135,16 @@ Program İngilizce kullanılıyorsa sayfa ve sabit sütun adları da İngilizce 
 - **Hata kaydı:** `%LOCALAPPDATA%\KADEM\hata_kaydi.txt`. Bir hata olursa bu dosyayı gönderin.
 - **Eski sürümden geçiş:** v0.2 (C3D Veri Çekici) projeleri (`.c3dproj`) ve şablonları olduğu gibi açılır; EMG kanal
   eşleştirmeleri ve dil tercihi ilk açılışta taşınır.
+
+## Atıf
+
+KADEM Zenodo'da arşivlenmiştir. Bir yayında kullandıysanız lütfen kullandığınız sürüme atıf verin:
+
+> Hekim Ö. *KADEM: Kinematic–Kinetic Automated Data Extraction in Motion* (Version 0.3.1) [Computer software].
+> Zenodo; 2026. https://doi.org/10.5281/zenodo.24401204
+
+[10.5281/zenodo.24401203](https://doi.org/10.5281/zenodo.24401203) DOI'si tüm sürümleri kapsar ve her zaman en son sürüme yönlendirir; her sürümün kendi
+DOI'si o Zenodo sayfasında listelenir. Atıf bilgileri: [CITATION.cff](CITATION.cff).
 
 ## Kapsam ve sorumluluk
 

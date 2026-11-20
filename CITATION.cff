@@ -12,6 +12,14 @@ authors:
     orcid: "https://orcid.org/0000-0002-7977-6797"
     affiliation: "Motion Analysis Laboratory, Department of Orthopedics and Traumatology, Kartal Dr. Lütfi Kırdar City Hospital, Istanbul, Türkiye"
 version: 0.3.1
+doi: 10.5281/zenodo.24401203
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24401203
+    description: All versions (resolves to the latest)
+  - type: doi
+    value: 10.5281/zenodo.24401204
+    description: Version 0.3.1
 date-released: 2026-11-20
 keywords:
   - gait analysis
