@@ -27,6 +27,8 @@ jobs:
   build:
     needs: sozdizimi
     runs-on: windows-latest
+    permissions:
+      contents: write   # sürüm (release) oluşturmak için
     steps:
       - uses: actions/checkout@v4
 
@@ -59,9 +61,28 @@ jobs:
           Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
           if (-not $ok) { throw "KADEM.exe başladı ama 60 saniye içinde yanıt vermedi." }
 
-      - name: Zip olarak koy
+      - name: Zip olarak koy (Actions sayfası, 90 gün)
         uses: actions/upload-artifact@v4
         with:
           name: KADEM_Windows
           path: dist/KADEM/
           retention-days: 90
+
+      # Yalnızca v* etiketlerinde: KADEM_Windows.zip'i kalıcı olarak sürüm (Releases) sayfasına koy.
+      # Sürüm notu CHANGELOG.md'deki ilgili bölümden alınır. Zenodo bu sürümü arşivleyip DOI verir.
+      - name: Sürüm zip'i ve notu hazırla
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          Compress-Archive -Path dist\KADEM\* -DestinationPath KADEM_Windows.zip
+          $surum = "${{ github.ref_name }}".TrimStart('v')
+          python -c "import re,sys; s=open('CHANGELOG.md',encoding='utf-8').read(); m=re.search(r'^## '+re.escape(sys.argv[1])+r'\s*\n(.*?)(?=^## |\Z)', s, re.S|re.M); open('surum_notu.md','w',encoding='utf-8').write((m.group(1).strip() if m else 'See CHANGELOG.md.')+'\n\nWindows: download KADEM_Windows.zip below, extract it and run KADEM.exe (no Python needed).\n')" $surum
+          Get-Content surum_notu.md
+
+      - name: Sürümü yayınla
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: KADEM ${{ github.ref_name }}
+          body_path: surum_notu.md
+          files: KADEM_Windows.zip

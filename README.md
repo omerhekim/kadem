@@ -40,10 +40,10 @@ patient means.
 
 ## Scope and limitations
 
-- Written for and tested with C3D files exported from Vicon Nexus after Plug-in Gait lower-body processing. Files from
-  models that write the same output names (for example the Conventional Gait Model implementations) are expected to
-  work but have not been systematically tested. Outputs with other names (for example Oxford Foot Model segments) cannot
-  be selected yet.
+- Written for and tested with C3D files exported from Vicon Nexus after Plug-in Gait lower-body processing. The
+  lower-body outputs of the Conventional Gait Model 2.2 (pyCGM2) have also been tested by the author and work. Other
+  models that write the same output names are expected to work but have not been tested. Upper-body outputs have not
+  been tested, and outputs with other names (for example Oxford Foot Model segments) cannot be selected yet.
 - Kinetic variables are computed only in cycles with force-plate contact on that side, judged from that side's ground
   reaction force in the file.
 - Toe clearance is measured from the TOE marker relative to a floor plane fitted to mid-stance TOE positions in the
@@ -54,19 +54,23 @@ patient means.
 KADEM runs on Windows 10 or 11. It shows its interface in an application window of Microsoft Edge (or Chrome) and
 talks only to a local server on `127.0.0.1`. No data leaves the computer.
 
-**Build the standalone program (once):**
+### Download (no Python needed)
 
-1. Install Python 3.10 or newer and tick "Add python.exe to PATH".
-2. Double-click `build_exe.bat`. This needs internet access and takes 5–10 minutes.
-3. The program is `dist\KADEM\KADEM.exe`. Copy the whole `dist\KADEM` folder to other computers; they do not need
-   Python.
+1. Open the [Releases](https://github.com/omerhekim/kadem/releases) page and download `KADEM_Windows.zip` from the latest version.
+2. Extract it to any folder and run `KADEM.exe`. Keep the `_internal` folder next to it.
+3. The program is not code-signed, so Windows SmartScreen may warn on the first start: choose "More info → Run anyway".
 
-**Or run from source:** double-click `calistir.bat`, or
+### Run from source (for developers)
+
+Requires Python 3.10 or newer.
 
 ```
 pip install -r requirements.txt
 python -m kadem
 ```
+
+On Windows, `calistir.bat` does the same. `build_exe.bat` builds `dist\KADEM\KADEM.exe` locally; the release builds
+are made the same way on GitHub Actions (`.github/workflows/build.yml`).
 
 ## Quick start
 
@@ -102,7 +106,7 @@ accidental edits.
 ## Validation
 
 The values were compared with exports from Vicon Polygon and with Noraxon myoRESEARCH on the developer's clinical
-data. A description of the comparison and a public example data set will be added to this repository.
+data.
 
 ## Citing
 

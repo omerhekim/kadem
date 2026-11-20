@@ -7,21 +7,23 @@ Aralık, değişken ve istatistik açılır listelerden seçilir; sonuçlar SPSS
 
 ## Kurulum
 
-### A) Programı (.exe) oluşturma: bir kez yapılır, sonra dağıtılır
+Program Windows 10 ve 11'de çalışır. Kendi penceresinde açılır (Windows'taki Microsoft Edge'in uygulama modu); pencereyi
+kapatınca program da kapanır. Bilgisayar dışına veri gönderilmez; program yalnızca bu bilgisayarın içinde (127.0.0.1) çalışır.
 
-1. Python 3.10 ya da daha yeni bir sürümün kurulu olduğu bir Windows bilgisayarda bu klasörü açın.
-   Python yoksa https://www.python.org adresinden kurun ve kurulumda **"Add python.exe to PATH"** kutusunu işaretleyin.
-2. `build_exe.bat` dosyasına çift tıklayın. İnternet gerekir; 5–10 dakika sürer.
-3. İşlem bitince `dist\KADEM` klasörü açılır. Programın kendisi içindeki **`KADEM.exe`** dosyasıdır.
-4. Meslektaşlarınıza `dist\KADEM` klasörünün **tamamını** zipleyip verin. Onların bilgisayarında Python gerekmez.
-   Klasörü istediğiniz yere koyup `.exe` için masaüstüne kısayol oluşturabilirsiniz.
+### A) İndirip çalıştırma (Python gerekmez)
 
-### B) Kaynaktan çalıştırma (Python kurulu bilgisayarda)
+1. [Releases](https://github.com/omerhekim/kadem/releases) sayfasından en son sürümün `KADEM_Windows.zip` dosyasını indirin.
+2. Zip'i istediğiniz bir klasöre çıkarın ve **`KADEM.exe`** dosyasını çalıştırın. Yanındaki `_internal` klasörü
+   programın parçasıdır; ikisi aynı yerde kalmalı. `.exe` için masaüstüne kısayol oluşturabilirsiniz.
+3. Program imzasız olduğu için Windows ilk açılışta SmartScreen uyarısı verebilir: "Ek bilgi → Yine de çalıştır".
+   Kurum bilgisayarlarında bilgi işlem onayı gerekebilir.
 
-`calistir.bat` dosyasına çift tıklayın. İlk çalıştırmada gerekli paketleri kurar (internet gerekir), sonra doğrudan açılır.
+### B) Kaynaktan çalıştırma (geliştiriciler için)
 
-Program açılınca kendi penceresinde çalışır (Windows'taki Microsoft Edge'in uygulama modu). Pencereyi kapatınca program da kapanır.
-Bilgisayar dışına veri gönderilmez; program yalnızca bu bilgisayarın içinde (127.0.0.1) çalışır.
+Python 3.10 ya da daha yeni bir sürüm gerekir (kurulumda **"Add python.exe to PATH"** kutusunu işaretleyin).
+`calistir.bat` dosyasına çift tıklayın; ilk çalıştırmada gerekli paketleri kurar (internet gerekir), sonra programı açar.
+`build_exe.bat` aynı bilgisayarda `dist\KADEM\KADEM.exe` dosyasını derler; Releases sayfasındaki sürümler de aynı
+yöntemle GitHub üzerinde derlenir.
 
 ## Kullanım
 
@@ -135,6 +137,7 @@ Program İngilizce kullanılıyorsa sayfa ve sabit sütun adları da İngilizce 
 ## Kapsam ve sorumluluk
 
 KADEM araştırma amaçlı bir yazılımdır; tıbbi cihaz değildir ve tanı ya da tedavi kararı için tek başına kullanılmamalıdır.
-Program, Vicon Nexus'ta Plug-in Gait (ya da aynı çıktı adlarını kullanan Conventional Gait Model) ile işlenmiş C3D dosyaları için
-yazılmış ve bu dosyalarla sınanmıştır. Vicon, Nexus, Polygon ve Plug-in Gait, Vicon Motion Systems Ltd.'nin; Noraxon ve
+Program, Vicon Nexus'ta Plug-in Gait alt ekstremite modeliyle işlenmiş C3D dosyaları için yazılmış ve bu dosyalarla
+sınanmıştır. Conventional Gait Model 2.2 (pyCGM2) alt ekstremite çıktılarıyla da denenmiş ve çalışmaktadır. Aynı çıktı
+adlarını kullanan başka modellerin de çalışması beklenir ama denenmemiştir; üst ekstremite çıktıları denenmemiştir. Vicon, Nexus, Polygon ve Plug-in Gait, Vicon Motion Systems Ltd.'nin; Noraxon ve
 myoRESEARCH, Noraxon USA Inc.'in markalarıdır. KADEM bu şirketlerle bağlantılı değildir ve onların yazılımını içermez.

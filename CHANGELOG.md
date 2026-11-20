@@ -9,7 +9,8 @@
   stopped sending its regular signal.
 - English interface: drop-down group headings (e.g. "Windows", "Instants") were still in Turkish.
 - Windows build: the build now stops if any module is missing from the program, and the source is checked on
-  Python 3.10–3.13.
+  Python 3.10–3.13. The Windows program (`KADEM_Windows.zip`) is attached to each release; Python is no longer needed
+  to use KADEM.
 
 ## 0.3.0
 
